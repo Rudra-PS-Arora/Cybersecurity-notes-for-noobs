@@ -1,12 +1,12 @@
 CMD.exe
 -----BAISC--------------
-set- where will the command will run denoted by PATH
+set- where the command will run, denoted by PATH
 driverquesry
-friverquery | more
-1. systeminfo - information about system
-2. systeminfo | more - more is used for layiong contents page by page 
-3. ping example.com - used to ping a website (ICMP - internet control message protocol)
-3. tracert example.com - used for looking how many hops/no of routers it took to reach the web server
+driverquery | more
+1. systeminfo - information aboutthe  system
+2. systeminfo | more - more is used for laying out the contents page by page 
+3. ping example.com - used to ping a website (ICMP - Internet Control Message Protocol)
+3. tracert example.com - used for looking at how many hops/no of routers it took to reach the web server
 
 
 ----NETWORK CONFIGURATION-------
@@ -104,6 +104,7 @@ taskkill /PID 4567
 shutdown/s
 shutdown/r
 -f -t0
+
 
 
 
