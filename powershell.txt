@@ -1,0 +1,140 @@
+# POWERSHELL
+1. PowerShell is a task automation and configuration management program from Microsoft, consisting of a command-line shell and the associated scripting language. 	
+
+2. “PowerShell is a cross-platform task automation solution made up of a command-line shell, a scripting language, and a configuration management framework.”
+
+3. .NET framework
+
+4.PowerShell is object-oriented, which means it can handle complex data types and interact with system components more effectivel
+
+5. In programming, an object represents an item with properties (characteristics) and methods (actions). For example, a car object might have properties like Color, Model, and FuelLevel, and methods like Drive(), HonkHorn(), and Refuel().
+
+Similarly, in PowerShell, objects are fundamental units that encapsulate data and functionality, making it easier to manage and manipulate information. An object in PowerShell can contain file names, usernames or sizes as data (properties), and carry functions (methods) such as copying a file or stopping a process.
+
+6. , PowerShell commands are known as cmdlets
+
+-------------BASIC SYNTAX------------------
+
+Basic Syntax: Verb-Noun 
+Cmdlets follow a consistent Verb-Noun naming convention. This structure makes it easy to understand what each cmdlet does. The Verb describes the action, and the Noun specifies the object on which action is performed. For example:
+
+Get-Content: Retrieves (gets) the content of a file and displays it in the console.
+Set-Location: Changes (sets) the current working directory.
+
+
+1. Get-Command - list all commans , functions and alias
+2. get-command -CommandType "Function" - list all function command.
+3. Get-Help Get-Date - help regarding get-data
+4. Get-Alias
+example--
+5. get-childitem = dir=list all directory
+6. set-location = cd
+
+
+
+--------------Find and Download Cmdlets------------------
+To search for modules (collections of cmdlets) in online repositories like the PowerShell Gallery, we can use Find-Module. Sometimes, if we don’t know the exact name of the module, it can be useful to search for modules with a similar name. We can achieve this by filtering the Name property and appending a wildcard (*) to the module’s partial name, using the following standard PowerShell syntax: 
+
+
+Cmdlet -Property "pattern*".
+
+ex-
+1. Find-module -name "powershell*"
+2. Install-Module -Name "PowerShellGet"
+3. imp-find a command --> Get-Command -Name Remove*
+
+
+--------------Navigating the File System and Working with Files------------------------
+
+1. Get-Location
+2. get-childitem -Path ".\WinMetadata" -- here winmetadata is a dir and get-childitem = dir(ls in Linux)
+3. Set-Location -Path ".\Documents"
+4. New-Item -Path ".\captain-cabin\captain-wardrobe" -ItemType "Directory"
+5.  New-Item -Path ".\captain-cabin\captain-wardrobe\captain-boots.txt" -ItemType "File"  
+6. Remove-Item -Path ".\captain-cabin\captain-wardrobe\captain-boots.txt" (remove dict )
+7. Remove-Item -Path ".\captain-cabin\captain-wardrobe" (remove txt file)
+8. Copy-Item -Path .\captain-cabin\captain-hat.txt -Destination .\captain-cabin\captain-hat2.txt (copy)
+9.  Get-Content -Path ".\captain-hat.txt"
+10. move-item -Path .\captain-cabin\captain-hat.txt -Destination .\captain-cabin\captain-hat2.txt (copy)
+Get-Content	Reads file contents
+Get-ChildItem	Lists files + folders
+Set-Content	Writes to files
+New-Item	Creates files or folders
+
+-----------------Piping, Filtering, and Sorting Data---------------------------------------
+
+Piping is a technique used in command-line environments that allows the output of one command to be used as the input for another. This creates a sequence of operations where the data flows from one command to the next. Represented by the | symbol,
+
+1. Get-ChildItem | Sort-Object Length
+2. get-childitem | where-object -Property Extention -eq .txt
+
+-gt → greater than
+-ge  "greater than or equal to". This is the non-strict version of the previous operator. A combination 	of -gt and -eq.
+-lt → less than
+-eq → equal
+-ne = not equal tp
+-le less than equal to
+
+3. Get-ChildItem | Where-Object -Property "Name" -like "ship*"  
+roperties that match (-like
+
+4.  Get-ChildItem | Select-Object Name,Length 
+The next filtering cmdlet, Select-Object, is used to select specific properties from objects or limit the number of objects returned. It’s useful for refining the output to show only the details one needs.
+
+
+The last in this set of filtering cmdlets is Select-String. This cmdlet searches for text patterns within files, similar to grep in Unix-based systems or findstr in Windows Command Prompt. It’s commonly used for finding specific content within log files or documents.
+
+5. Select-String -Path ".\captain-hat.txt" -Pattern "hat" 
+6. Get-ChildItem | Sort-Object Length -Descending | Select-Object -First 1
+
+---------------System and Network Information----------------------------------
+1. Get-ComputerInfo - like systeminfo but better
+2. Get-LocalUser - user list
+3. Get-NetIPConfiguration  - print network configuration
+4. Get-NetIPAddress - how details for all IP addresses configured on the system
+
+
+--------------Real-Time System Analysis------------------------------------
+1. Get-Process
+2. Get-Service -  retrieval of information about the status of services 
+3. Get-NetTCPConnection  displays current TCP connections
+4. Get-FileHash  - useful cmdlet for generating file hashes
+ex Get-FileHash -Path .\ship-flag.txt
+
+
+
+Alternate Data Streams (ADS) are a feature of the Windows NTFS file system that allow a file to contain hidden extra data attached to it, without changing the file’s visible size or content
+
+ Get-Item -Path "C:\House\house_log.txt" -Stream *
+
+
+In the output above, you can see two streams that are attached to the file C:\House\house_log.txt:
+
+:$DATA is the default data stream of every NTFS file. It contains the normal file contents and is not an ADS.
+
+housinginginfo is the Alternate Data Stream (ADS) added to this file. It appears as house_log.txt:housinginfo, which means an extra hidden stream named housinginfo is attached to this file.
+
+1. Get-NetTCPConnection | Select-Object LocalAddress,LocalPort,Remo
+2. get-process -id 20596 
+
+OwningProcess is a property that tells you which program (process ID) is responsible for something like a network connection, file handle, or service. In simple words, it answers the question: “Which running program owns this?”
+
+3. Stop-Process -Id 1234
+
+
+
+---------------Scripting---------------------------
+Scripting is the process of writing and executing a series of commands contained in a text file, known as a script, to automate tasks that one would generally perform manually in a shell, like PowerShell.
+
+Invoke-Command is essential for executing commands on remote systems, making it fundamental for system administrators, security engineers and penetration testers.
+
+Invoke-Command -ComputerName #name  -ScriptBlock { Get-Service }
+
+get-service can be anu command
+
+
+
+
+
+
+

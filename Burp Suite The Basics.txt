@@ -1,0 +1,113 @@
+Burp Suite: The Basics
+Enterprise | Community | Professional editions
+
+---------------Introduction---------------------------
+Burp Suite is a web security testing tool used by hackers, pentesters, and security teams to see, intercept, modify, and attack web traffic between your browser and a website.
+
+Fuzzing = automated trial-and-error input testing
+Fuzzing is like throwing thousands of weird inputs at a system to see what breaks, leaks, or behaves differently—and those differences often point to vulnerabilities.
+
+
+Burp Suite → Web application hacking tool
+Wireshark → Network traffic analyzer
+
+Wireshark watches packets. Burp Suite breaks web apps.
+Wireshark → network fundamentals
+
+Burp Suite → web hacking mastery
+
+Burp Proxy is a tool that sits between your browser (client) and a web server, acting as a man-in-the-middle so you can see, intercept, modify, and replay HTTP/HTTPS requests and responses in real time.
+
+IMP------------>
+An Application Programming Interface (API) is a defined way for one software system to communicate with another by sending and receiving structured requests and responses, usually over HTTP, without needing to know how the other system is internally built. Instead of a human using a browser, a program acts as the client and sends requests (like GET, POST, PUT, DELETE) to specific API endpoints (URLs), including headers, parameters, and data in formats such as JSON or XML, and the server responds with status codes and data. APIs allow different applications—web apps, mobile apps, microservices, or third-party integrations—to securely share functionality and data, such as fetching user details, processing payments, or updating records. From a security perspective, APIs must enforce strong authentication, authorization, and input validation, because exposing an API without proper controls can lead to issues like IDOR, broken access control, data leakage, or mass assignment. In simple terms, an API is a contracted communication layer that lets software talk to software in a predictable, automated, and scalable way.
+
+In HTTP, endpoints are the specific URLs where HTTP messages are sent and received, representing a particular function or resource on a server. An endpoint combines the scheme + host + path (and sometimes query parameters), and each endpoint is designed to handle certain HTTP methods (GET, POST, PUT, DELETE). When a client sends an HTTP request message to an endpoint, the server routes that message to the code responsible for that path and method, processes it, and returns an HTTP response. For example, /api/users might be an endpoint that accepts GET requests to list users and POST requests to create one. In short, an endpoint is the exact address that an HTTP message targets to perform a specific action.
+
+
+API = the door + rules
+
+HTTP message = the knock you make on that door
+
+
+---------------------Features of Burp Community-----------------------------------
+1. Proxy - the intermediate web server between client and web browser helps to modilfy, view or intercept http requests
+
+2. Repeater: Repeater allows for capturing, modifying, and resending the same request multiple times. This functionality is particularly useful when crafting payloads through trial and error (e.g., in SQLi - Structured Query Language Injection)
+
+3.Intruder: Despite rate limitations in Burp Suite Community, Intruder allows for spraying endpoints with requests. It is commonly utilized for brute-force attacks or fuzzing endpoints.
+
+4. Decoder: Decoder offers a valuable service for data transformation. It can decode captured information or encode payloads before sending them to the target. While alternative services exist for this purpose, leveraging Decoder within Burp Suite can be highly efficient.
+
+5. Comparer: As the name suggests, Comparer enables the comparison of two pieces of data at either the word or byte level. While not exclusive to Burp Suite, the ability to send potentially large data segments directly to a comparison tool with a single keyboard shortcut significantly accelerates the process.
+
+6. Sequencer: Sequencer is typically employed when assessing the randomness of tokens, such as session cookie values or other supposedly randomly generated data. If the algorithm used for generating these values lacks secure randomness, it can expose avenues for devastating attacks.
+
+Beyond the built-in features, the Java codebase of Burp Suite facilitates the development of extensions to enhance the framework's functionality. These extensions can be written in Java, Python (using the Java Jython interpreter), or Ruby (using the Java JRuby interpreter). The Burp Suite Extender module allows for quick and easy loading of extensions into the framework, while the marketplace, known as the BApp Store, enables downloading of third-party modules. While certain extensions may require a professional license for integration, there are still a considerable number of extensions available for Burp Community. For instance, the Logger++ module can extend the built-in logging functionality of Burp Suite.
+
+--------------------The Dashboard--------------------------------
+Tasks: The Tasks menu allows you to define background tasks that Burp Suite will perform while you use the application. In Burp Suite Community, the default “Live Passive Crawl” task, which automatically logs the pages visited, is sufficient for our purposes in this module. Burp Suite Professional offers additional features like on-demand scans.
+
+Event log: The Event log provides information about the actions performed by Burp Suite, such as starting the proxy, as well as details about connections made through Burp.
+
+Issue Activity: This section is specific to Burp Suite Professional. It displays the vulnerabilities identified by the automated scanner, ranked by severity and filterable based on the certainty of the vulnerability.
+
+Advisory: The Advisory section provides more detailed information about the identified vulnerabilities, including references and suggested remediations. This information can be exported into a report. In Burp Suite Community, this section may not show any vulnerabilities.
+
+-------------Navigation-------------------------
+
+Shortcut		Tab
+Ctrl + Shift + D	Dashboard
+Ctrl + Shift + T	Target tab
+Ctrl + Shift + P	Proxy tab
+Ctrl + Shift + I	Intruder tab
+Ctrl + Shift + R	Repeater tab
+
+
+----------OPtions------------------------------------
+
+Types of setting:  Global settings (also known as User settings) and Project settings.
+and learnt about setting option
+
+----------------Introduction to the Burp Proxy------------------------------
+
+------------------Connecting through the Proxy (FoxyProxy)------------------
+FoxyProxy is a browser extension that helps your browser decide which proxy to use and when.
+It does NOT intercept traffic, analyze requests, or hack anything. It’s just a traffic switch.
+
+Think of FoxyProxy as:
+
+“Traffic manager for your browser”
+
+Because FoxyProxy needs to know:
+WHERE is the proxy server running?
+When you run Burp on your own machine:
+IP = 127.0.0.1 (localhost)
+Means: “Send traffic to my own computer”
+If Burp was on another machine:
+IP = that machine’s IP
+Example: 192.168.1.10
+
+
+Transport Layer Security is a cryptographic protocol that secures communications over a network. It provides authentication through the use of certificates, integrity by detecting tampering and confidentiality by encrypting the data.
+
+
+You visit https://example.com
+
+Server sends a TLS certificate
+
+Browser checks:
+
+Is this certificate valid?
+
+Is it signed by a trusted authority?
+
+Does it match the domain?
+
+If valid → encrypted session starts
+
+Data flows securely
+
+This process is called the TLS handshake.
+
+TLS uses certificates for identity, and cryptography for secrecy.
+

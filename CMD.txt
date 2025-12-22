@@ -1,0 +1,109 @@
+CMD.exe
+-----BAISC--------------
+set- where will the command will run denoted by PATH
+driverquesry
+friverquery | more
+1. systeminfo - information about system
+2. systeminfo | more - more is used for layiong contents page by page 
+3. ping example.com - used to ping a website (ICMP - internet control message protocol)
+3. tracert example.com - used for looking how many hops/no of routers it took to reach the web server
+
+
+----NETWORK CONFIGURATION-------
+4. nslookup example.com
+5. nslookup example.com 1.1.1.1 or 8.8.8.8 - same but we specify the DNS server
+6. ver- version of windows
+7. help
+8. cls - clear
+9. ipconfig- ip address. subnet mask and gateway
+10. netstat - current network connections and listening ports
+-a displays all established connections and listening ports
+-b shows the program associated with each listening port and established connection
+-o reveals the process ID (PID) associated with the connection
+-n uses a numerical form for addresses and port numbers
+
+imp -- if u know a ip and wanna know its DNS USE - nslookup ip
+ex -  172.66.164.239
+nslookup  172.66.164.239
+
+Imp- DNS has two directions
+1. forward 
+domain -> ip
+example.com -> ip
+2. Backward
+ip -> domain but if there is no PTR record or pointer record
+reverse dns is not possible means (Cloud servers
+	temporary instances
+	Security reasons
+	Unassigned or internal-use IPs
+	CDNs hiding infrastructure)
+
+Anycast IP (IMPORTANT for CDNs)
+Same IP shared by many servers
+
+
+Type	Changes?	Internet visible?
+Public	Yes/No	✅		yes		
+Private	No	❌		x
+Static	❌	✅		yes	
+Dynamic	✅	✅		yes
+IPv4	—	✅		yes
+IPv6	—	✅		yes
+Loopback	❌		❌
+Anycast	❌	✅		yes
+
+
+
+ipconfig /all - used to get  the server’s physical address
+arp -a used to find MAC address of local devices
+
+
+
+
+----FILE SYSTEM------
+1. cd - print current directory or change
+dir - view the child directories
+dir /a - Displays hidden and system files as well.
+dir /s - Displays files in the current directory and all subdirectories.
+tree -to visually represent the child directories and subdirectories
+mkdir directory_name - make directory
+rmdir - remove 
+type- view text files with the command
+more - smae but used for large files
+Display text files: more file.txt
+Pipe long output to view it page by page: some_command | more
+copy- copy files 
+syntax - copy test.txt test2.txt
+copy file.txt C:\Users\RUDRA\Desktop\
+
+move - move form one dir to other or rename 
+syntax - move test2.txt
+move file.txt newname.txt (rename)
+delete a file using del or erase.
+
+HOW TO CREATE A TEXT FILE
+type nul > file.txt (nothing inside)
+echo New line >> file.txt
+📌 >> appends
+📌 > overwrites
+notepad file.txt (edit a file)
+
+
+
+
+
+--------------TASK AND PROCESES---------------
+tasklist -  list the running processes
+tasklist /? - view help page 
+tasklist /FI "imagename eq sshd.exe"
+taskkill /PID 4567
+
+ /FI is used to set the filter image name equals sshd.exe.
+
+
+shutdown/s
+shutdown/r
+-f -t0
+
+
+

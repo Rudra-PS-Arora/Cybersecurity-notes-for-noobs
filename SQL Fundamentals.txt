@@ -1,0 +1,244 @@
+SQL Fundamentals
+
+-----------Database 101-----------------------------------
+Databases are an organised collection of structured information or data that is easily accessible and can be manipulated or analysed. 
+
+relational databases (aka SQL) vs non-relational databases (aka NoSQL). 
+
+Tables, Rows and Columns
+
+Relational databases: Store structured data, meaning the data inserted into this database follows a structure. For example, the data collected on a user consists of first_name, last_name, email_address, username and password.
+Non-relational databases: Instead of storing data the above way, store data in a non-tabular format. For example, if documents are being scanned, which can contain varying types and quantities of data, and are stored in a database that calls for a non-tabular format. Here is an example of what that might look like: 
+
+Primary Keys: A primary key is used to ensure that the data collected in a certain column is unique. 
+
+Foreign Keys: A foreign key is a column (or columns) in a table that also exists in another table within the database, and therefore provides a link between the two tables. 
+
+----------------------SQL------------------------------------------
+Databases are usually controlled using a Database Management System (DBMS)
+Serving as an interface between the end user and the database
+ a DBMS is a software program that allows users to retrieve, update and manage the data being stored. Some examples of DBMSs include MySQL, MongoDB, Oracle Database and Maria DB.
+
+------------Database and Table Statements----------------------------
+
+(A) Database Statements:
+	CREATE DATABASE database_name;
+	SHOW DATABASES;
+	USE thm_bookmarket_db;
+	DROP database database_name;
+
+(B) Table statements:
+
+mysql> CREATE TABLE book_inventory (
+    book_id INT AUTO_INCREMENT PRIMARY KEY,
+    book_name VARCHAR(255) NOT NULL,
+    publication_date DATE
+);
+
+	
+DESCRIBE book_inventory;
+
+ALTER TABLE book_inventory
+ADD page_count INT;
+
+DROP TABLE table_name;
+
+
+----------------------CRUD Operations---------------------------
+CRUD stands for Create, Read, Update, and Delete.
+
+reate (INSERT statement) - Adds a new record to the table.
+Read (SELECT statement) - Retrieves record from the table.
+Update (UPDATE statement) - Modifies existing data in the table.
+Delete (DELETE statement) - Removes record from the table.
+
+
+1. NSERT INTO books (id, name, published_date, description)
+    VALUES (1, "Android Security Internals", "2014-10-14", "An In-Depth Guide to Android's Security Architecture");
+
+2. 
+SELECT * FROM books;
+SELECT name, description FROM books;
+
+3. UPDATE books
+    SET description = "An In-Depth Guide to Android's Security Architecture."
+    WHERE id = 1;
+
+4. DELETE FROM books WHERE id = 1;
+
+-------------------Clauses--------------------------------
+
+A clause is a part of a statement that specifies the criteria of the data being manipulated, usually by an initial statement. Clauses can help us define the type of data and how it should be retrieved or sorted. 
+
+DISTINCT, GROUP BY, ORDER BY, and HAVING
+
+1.
+The DISTINCT clause is used to avoid duplicate records when doing a query, returning only unique values.
+
+ SELECT DISTINCT name FROM books;
+
+2. 
+The statement means that GROUP BY combines rows that have the same value in one or more columns into a single group, and then lets you apply aggregate functions (like COUNT, SUM, AVG, MIN, MAX) to each group instead of to individual rows. Instead of returning every record, the query returns one result per group, with the aggregated values shown in columns. For example, if you group sales records by product_id, GROUP BY collects all rows for each product and allows you to calculate total sales or average price per product, turning many rows into a summarized, column-based result.
+
+A group is all rows that share the same value in a column.
+
+SELECT name, COUNT(*)
+    FROM books
+    GROUP BY name;
+
+# name can be anything 
+	
+3. 
+ORDER BY clause can be used to sort the records returned by a query in ascending or descending order.
+
+ SELECT *
+    FROM books
+    ORDER BY published_date ASC;
+descending order using DESC
+
+4. 
+The HAVING clause is used with other clauses to filter groups or results of records based on a condition
+
+SELECT name, COUNT(*)
+    FROM books
+    GROUP BY name
+    HAVING name LIKE '%Hack%';
+
+
+---------------------------Operators-------------------------------
+
+1. Logical Operators
+
+(a) like:
+The LIKE operator is commonly used in conjunction with clauses like WHERE in order to filter for specific patterns within a column
+
+SELECT *
+    FROM books
+    WHERE description LIKE "%guide%";
+
+(B) AND Operator:
+The AND operator uses multiple conditions within a query and returns TRUE if all of them are true.
+
+SELECT *
+    FROM books
+    WHERE category = "Offensive Security" 	 name = "Bug Bounty Bootcamp"; 
+
+(c) OR:
+The OR operator combines multiple conditions within queries and returns TRUE if at least one of these conditions is true.
+
+SELECT *
+    FROM books
+    WHERE name LIKE "%Android%" OR name LIKE "%iOS%"; 
+
+(d) NOT:
+he NOT operator reverses the value of a boolean operator, allowing us to exclude a specific condition.
+
+SELECT *
+    FROM books
+    WHERE NOT description LIKE "%guide%";
+
+(e) BETWEEN:
+The BETWEEN operator allows us to test if a value exists within a defined range.
+
+SELECT *
+    FROM books
+    WHERE id BETWEEN 2 AND 4;
+
+(2) Comparison Operators
+
+(A) EQUAL TO:
+The = (Equal) operator compares two expressions and determines if they are equal, or it can check if a value matches another one in a specific column.
+
+SELECT *
+    FROM books
+    WHERE name = "Designing Secure Software";
+
+(b) NOT EQUAL TO:
+The != (not equal) operator compares expressions and tests if they are not equal; it also checks if a value differs from the one within a column.
+
+SELECT *
+    FROM books
+    WHERE category != "Offensive Security";
+
+(C) LESS THAN:
+The < (less than) operator compares if the expression with a given value is lesser than the provided one.
+
+ SELECT *
+    FROM books
+    WHERE published_date < "2020-01-01";
+
+
+(D) GREATER THAN:
+The > (greater than) operator compares if the expression with a given value is greater than the provided one.
+
+SELECT *
+    FROM books
+    WHERE published_date > "2020-01-01";
+
+(E)Less Than or Equal To and Greater  Than or Equal TO:
+
+ SELECT *
+    FROM books
+    WHERE published_date <= "2021-11-15";
+
+SELECT *
+    FROM books
+    WHERE published_date >= "2021-11-02";
+
+
+------------------------FUNCTIONS-------------------------------------
+
+(1) string functions:
+
+a. CONCAT() Function
+This function is used to add two or more strings together. It is useful to combine text from different columns.
+
+SELECT CONCAT(name, " is a type of ", category, " book.") AS book_info FROM books;
+
+b. GROUP_CONCAT() Function
+This function can help us to concatenate data from multiple rows into one field. Let's explore an example of its usage.
+
+SELECT category, GROUP_CONCAT(name SEPARATOR ", ") AS books
+    FROM books
+    GROUP BY category;
+c. 
+SUBSTRING() Function
+This function will retrieve a substring from a string within a query, starting at a determined position. The length of this substring can also be specified.
+
+SELECT SUBSTRING(published_date, 1, 4) AS published_year FROM books;
+
+d.
+LENGTH() Function
+This function returns the number of characters in a string. This includes spaces and punctuation. We can find an example below.
+
+SELECT LENGTH(name) AS name_length FROM books;
+
+(2) Aggregate Functions:
+
+a.
+COUNT() Function
+This function returns the number of records within an expression, as the example below shows
+
+ SELECT COUNT(*) AS total_books FROM books;
+
+b. SUM() Function
+This function sums all values (not NULL) of a determined column.
+
+SELECT SUM(price) AS total_price FROM books;
+
+c. 
+MAX() Function
+This function calculates the maximum value within a provided column in an expression.
+
+ SELECT MAX(published_date) AS latest_book FROM books;
+
+d. 
+MIN() Function
+This function calculates the minimum value within a provided column in an expression.
+
+SELECT MIN(published_date) AS earliest_book FROM books;
+
+------------------------------------------------------------------------------
+
+
+

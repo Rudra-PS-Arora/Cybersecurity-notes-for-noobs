@@ -1,0 +1,171 @@
+JavaScript Essentials
+------------INTRODUCTION--------------------------
+avaScript (JS) is a popular scripting language that allows web developers to add interactive features to websites containing HTML and CSS (styling). Once the HTML elements are created, you can add interactiveness like validation, onClick actions, animations, etc, through JS. Learning the language is equally important as that of HTML and CSS. The JS scripts are used primarily with HTML.
+
+---------------------Essential Concepts----------------------
+1. Variables - Var, let and const
+
+var, let, and const. While var is function-scoped, both let, and const are block-scoped, offering better control over variable visibility within specific code blocks.
+
+2. Data types
+string (text), number, boolean (true/false), null, undefined, and object (for more complex data like arrays or objects).
+
+3. Functions 
+A function represents a block of code designed to perform a specific task
+
+4. Loops: for, while,  and do while
+
+5. Request-Response Cycle
+In web development, the request-response cycle is when a user's browser (the client) sends a request to a web server, and the server responds with the requested information. This could be a webpage, data, or other resources. 
+
+-------------------------JavaScript Overview--------------------------
+JS is an interpreted language, meaning the code is executed directly in the browser without prior compilation
+
+// Hello, World! program
+console.log("Hello, World!");
+
+// Variable and Data Type
+let age = 25; // Number type
+
+// Control Flow Statement
+if (age >= 18) {
+    console.log("You are an adult.");
+} else {
+    console.log("You are a minor.");
+}
+
+// Function
+function greet(name) {
+    console.log("Hello, " + name + "!");
+}
+
+// Calling the function
+greet("Bob");
+
+
+
+--------------------Integrating JavaScript in HTML---------------------------
+
+There are two main ways to integrate JS into HTML: internally and externally.
+
+
+(1) Internal JavaScript
+Internal JS refers to embedding the JS code directly within an HTML document
+The script is inserted between <script> tags. These tags can be placed inside the <head>
+
+JS alone → terminal (Node.js)
+JS + HTML → browser
+file:// URL → local only
+http:// URL → network accessible
+Frontend JS → always readable
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Internal JS</title>
+</head>
+<body>
+    <h1>Addition of Two Numbers</h1>
+    <p id="result"></p>
+
+    <script>
+        let x = 5;
+        let y = 10;
+        let result = x + y;
+        document.getElementById("result").innerHTML = "The result is: " + result;
+    </script>
+</body>
+</html>
+
+(2) External JavaScript
+External JS involves creating and storing JS code in a separate file ending with a .js file extension. This method helps developers keep the HTML document clean and organised. The external JS file can be stored or hosted on the same web server as the HTML document or stored on an external web server such as the cloud.
+
+
+two files one the .js file the onther .html file 
+we use src tag to connect them
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External JS</title>
+</head>
+<body>
+    <h1>Addition of Two Numbers</h1>
+    <p id="result"></p>
+
+    <!-- Link to the external JS file -->
+    <script src="script.js"></script>
+</body>
+
+
+------------------------------------Abusing Dialogue Functions-----------------------------
+Dialouge: alert, prompt, and confirm
+
+(1) The alert function displays a message in a dialogue box with an "OK" button, typically used to convey information or warnings to user
+
+alert("Hello THM")
+
+
+(2) The prompt function displays a dialogue box that asks the user for input. It returns the entered value when the user clicks "OK", or null if the user clicks "Cancel"
+
+
+name = prompt("What is your name?");
+    alert("Hello " + name);
+
+
+(3)The confirm function displays a dialogue box with a message and two buttons: "OK" and "Cancel". It returns true if the user clicks "OK" and false if the user clicks "Cancel"
+
+confirm("Do you want to proceed?")
+
+-------------------------Bypassing Control Flow Statements-------------------------------
+
+Control flow in JS refers to the order in which statements and code blocks are executed based on certain conditions. JS provides several control flow structures such as if-else, switch statements to make decisions, and loops like for, while, and do...while to repeat actions. Proper use of control flow ensures that a program can handle various conditions effectively.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Age Verification</title>
+</head>
+<body>
+    <h1>Age Verification</h1>
+    <p id="message"></p>
+
+    <script>
+        age = prompt("What is your age")
+        if (age >= 18) {
+            document.getElementById("message").innerHTML = "You are an adult.";
+        } else {
+            document.getElementById("message").innerHTML = "You are a minor.";
+        }
+    </script>
+</body>
+</html>
+
+
+Bypassing Login Forms: view source code
+
+----------------------Exploring Minified Files---------------------------------
+
+Minification in JS is the process of compressing JS files by removing all unnecessary characters, such as spaces, line breaks, comments, and even shortening variable names. This helps reduce the file size and improves the loading time of web pages, especially in production environments. Minified files make the code more compact and harder to read for humans, but they still function exactly the same.
+
+Similarly, obfuscation is often used to make JS harder to understand by adding undesired code, renaming variables and functions to meaningless names, and even inserting dummy code.
+
+
+(1) To make code obfuscated:
+https://codebeautify.org/javascript-obfuscator#google_vignette
+
+(2) To retrieve code to human readable text:
+https://obf-io.deobfuscate.io/
+
+
+-----------------BEST practices-------------------------------------------
+
+Avoid Relying on Client-Side Validation Only
+Refrain from Adding Untrusted Libraries
+Avoid Hardcoded Secrets - Never hardcode sensitive data like API keys, access tokens, or credentials into your JS code, as the user can easily check the source code and get the password. 
+Minify and Obfuscate Your JavaScript Code
+
+

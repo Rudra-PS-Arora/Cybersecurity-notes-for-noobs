@@ -1,0 +1,49 @@
+Digital Forensics Fundamentals
+
+Forensics is the application of methods and procedures to investigate and solve crimes
+
+-------------------Digital Forensics Methodology-----------------------------
+the process of digital forensics in four phases---	
+Collection -- collecting the evidences: like mobile phones, laptops
+
+On basis of collection phase digital forensics is divided into:
+(1) computer forensics
+(2) network forensics
+(3) database forensics
+(4) cloud forensics
+(5) email forensics
+
+Examination -data usually needs to be filtered
+Analysis -analyze the data by correlating it with multiple pieces of evidence to draw conclusions
+
+Reporting -report is presented to law enforcement and executive management
+---------------------Evidence Acquisition--------------------------
+STEP-1 
+Proper Authorization - WARANT
+
+WAY--1
+Chain of Custody-Process of documenting the complete journey of evidence during a legal case lifetime, from the collection to final presentation in court.
+
+WAY--2
+Use of Write Blockers-A write blocker is a hardware or software tool used primarily in computer forensics to create an exact, read-only copy (image) of a storage device (like a hard drive or USB) by intercepting and preventing any write commands, ensuring the original evidence data remains untouched and its integrity is preserved for investigations
+
+-----------------------------Windows Forensics---------------------------------
+A disk image is an exact bit-by-bit copy of a storage device like:
+.dd
+.img
+.E01 (EnCase)
+
+A memory image is a snapshot of RAM (working memory) at a specific moment.
+
+Disk imaging: dd, FTK Imager, EnCase
+Memory imaging: DumpIt, Volatility, Rekall
+-----------------------QUESTIONS-------------------------------
+
+TXT FILES- pdfinfo
+sudo apt install poppler-utils
+pdfinfo pdf-name.pdf
+
+Jpg - Exif(Exchangeable Image File Format)
+sudo apt install libimage-exiftool-perl
+exiftool image-name.jpg
+--------------------------------------------------------------------------------

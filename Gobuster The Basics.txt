@@ -1,0 +1,154 @@
+Gobuster: The Basics
+
+Gobuster is a free and open-source directory and file enumeration tool. Penetration testers and security professionals use it to find hidden directories and files on web servers.
+
+Content Management System (CMS). These web applications are used to manage content on a website. For example, blogs, news sites, e-commerce sites and more!
+
+------------Gobuster: Introduction --------------------------
+So the “brute force” part is about guessing names, not passwords.
+Written in GO 
+
+It uses brute force wordlists to enumerate web application content, like:
+Directories
+Files
+Subdomains
+Virtual hosts
+
+gobuster --help
+
+
+| Short Flag | Long Flag    | Description                                                                                                                                                                        |
+| ---------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-t`       | `--threads`  | Sets the number of threads used for the scan. Each thread sends requests with a slight delay. Default is `10`. Increase for large wordlists or decrease based on system resources. |
+| `-w`       | `--wordlist` | Specifies the wordlist to use for enumeration. Each word is appended to the target URL during scanning.                                                                            |
+| *(none)*   | `--delay`    | Defines the time delay between sending requests. Useful for avoiding detection or rate-limiting by making traffic look normal.                                                     |
+| *(none)*   | `--debug`    | Enables debug mode to help troubleshoot unexpected errors during execution.                                                                                                        |
+| `-o`       | `--output`   | Writes the enumeration results to a specified output file.                                                                                                                         |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+gobuster dir -u "http://www.example.thm/" -w /usr/share/wordlists/dirb/small.txt -t 64
+
+
+-------------------------Directory and file enumeration-------------------
+
+gobuster dir --help
+
+
+| Flag | Long Flag                  | Description                                                                     |
+| ---- | -------------------------- | ------------------------------------------------------------------------------- |
+| `-c` | `--cookies`                | Configures a cookie to be sent with each request (e.g., session ID).            |
+| `-x` | `--extensions`             | Specifies file extensions to scan for (e.g., `.php`, `.js`).                    |
+| `-H` | `--headers`                | Configures a custom HTTP header to pass with each request.                      |
+| `-k` | `--no-tls-validation`      | Skips TLS certificate validation (useful for CTFs or self-signed certificates). |
+| `-n` | `--no-status`              | Hides HTTP status codes in the output to keep it clean.                         |
+| `-P` | `--password`               | Used with `--username` to perform authenticated requests.                       |
+| `-s` | `--status-codes`           | Displays only specified HTTP status codes (e.g., `200` or `300-400`).           |
+| `-b` | `--status-codes-blacklist` | Hides specified HTTP status codes; overrides `-s`.                              |
+| `-U` | `--username`               | Used with `--password` to perform authenticated requests.                       |
+| `-r` | `--followredirect`         | Tells Gobuster to follow HTTP redirects (e.g., 301, 302).                       |
+-----------------------------------------------------------------------------------------------------------------------
+
+gobuster dir -u "http://www.example.thm" -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -r
+-r configures Gobuster to follow the redirect response
+
+
+Let’s look at a second example where we use the -x flag to specify what type of files we want to enumerate:
+gobuster dir -u "http://www.example.thm" -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x .php,.js
+
+
+
+IMPORTANT------------->
+The URL will be the base path where Gobuster starts looking. So, the URL  above is using the root web directory. For example, in a typical Apache installation on Linux, this is /var/www/html. So if you have a “resources” directory and you want to enumerate that directory, you’d set the URL as http://www.example.thm/resources. You can also think of this like http://www.example.thm/path/to/folder.
+
+
+Gobuster does not enumerate recursively. So, if the results show a directory path you are interested in, you will have to enumerate that specific directory.
+
+
+--------------------------Subdomain Enumeration------------------
+ gobuster dns -help
+
+Domain resolution is the process of converting a domain name → IP address.
+
+CNAME = Canonical Name
+A CNAME record makes one domain point to another domain, not directly to an IP.
+
+| Record Type      | Points to      |
+| ---------------- | -------------- |
+| **A record** 	   | IP address     |
+| **CNAME record** | Another domain |
+
+
+BASIC SYNTAX-- gobuster dns -d example.thm -w /path/to/wordlist
+
+If the first entry of this list is 'all', the query would be all.example.thm.
+
+
+gobuster dns -d example.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+
+
+--------------Vhost enumeration----------------------------
+Virtual hosts are different websites on the same machine
+ 
+gobuster vhost --help
+
+gobuster vhost -u "http://example.thm" -w /path/to/wordlist
+
+| Short Flag | Long Flag           | Description                                                                                       |
+| ---------- | ------------------- | ------------------------------------------------------------------------------------------------- |
+| `-u`       | `--url`             | Specifies the base URL (target domain) used for brute-forcing virtual hostnames.                  |
+| *(none)*   | `--append-domain`   | Appends the base domain to each word in the wordlist (e.g., `word.example.com`).                  |
+| `-m`       | `--method`          | Specifies the HTTP method to use for requests (e.g., `GET`, `POST`).                              |
+| *(none)*   | `--domain`          | Appends a domain to each wordlist entry to form a valid hostname when not explicitly provided.    |
+| *(none)*   | `--exclude-length`  | Filters out results based on response body length to remove unwanted or false-positive responses. |
+| `-r`       | `--follow-redirect` | Follows HTTP redirects (useful when vhosts or subdomains redirect to other pages).                |
+-----------------------------------------------------------------------------------------------------------------------------------------
+gobuster vhost -u "http://10.48.147.110" --domain example.thm -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain --exclude-length 250-320 
+
+
+In vhost mode, Gobuster:
+Sends HTTP requests
+To the same IP / URL
+But changes the Host header using the wordlist
+
+
+In DNS mode, Gobuster:
+Talks to a DNS server
+Asks: “Does this domain exist?”
+
+| Flag               | Role                                    |
+| ------------------ | --------------------------------------- |
+| `--domain`         | Defines the base domain (`example.thm`) |1
+| `--append-domain`  | Attaches the domain to wordlist entries |2
+| `--exclude-length` | Removes fake vhost responses            |3
+
+3------------->
+real virtual hosts
+usually with different content and size
+often returning 200 OK
+
+2-----------------> and 1--------------------->
+
+--domain defines what domain to use
+--append-domain tells Gobuster to actually attach I	
+
+
+
+
+www → variable part (from wordlist)
+example.thm → fixed part
+What --domain example.thm does
+It tells Gobuster:
+“The second-level + top-level domain will always be example.thm.”
+So Gobuster knows it must build hostnames like:
+<word>.example.thm
+
+------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+

