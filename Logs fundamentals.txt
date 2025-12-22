@@ -1,0 +1,242 @@
+Logs fundamentals
+Logs are digital footprints of activity performed on a system
+
+USES OF LOGS
+
+SECURITY LOGS – USE CASES
+
+1. Security Events Monitoring
+   Logs help us detect anomalous behavior when real-time monitoring is used.
+
+2. Incident Investigation and Forensics
+   Logs are the traces of every kind of activity.
+   They offer detailed information on what happened during the incident.
+   The security team utilizes the logs to perform root cause analysis of incidents.
+
+3. Troubleshooting
+   Logs record errors in systems or applications.
+   They can be used to diagnose issues and help in fixing them.
+
+4. Performance Monitoring
+   Logs can provide valuable insights into the performance of applications.
+
+5. Auditing and Compliance
+   Logs play a major role in auditing and compliance.
+   They help establish a trail of different kinds of activities.
+
+
+-------------------------types of logs------------------------------------
+ Logs are segregated into multiple categories according to the type of information they provide
+
+Log Analysis is a technique for extracting valuable data from logs.
+
+LOG TYPES – OVERVIEW
+
+1. System Logs
+   Usage:
+   The system logs can be helpful in troubleshooting running issues in the OS.
+   These logs provide information on various operating system activities.
+
+   Examples:
+   - System startup and shutdown events
+   - Driver loading events
+   - System error events
+   - Hardware events
+
+
+2. Security Logs
+   Usage:
+   The security logs help detect and investigate incidents.
+   These logs provide information on security-related activities in the system.
+
+   Examples:
+   - Authentication events
+   - Authorization events
+   - Security policy change events
+   - User account change events
+   - Abnormal activity events
+
+
+3. Application Logs
+   Usage:
+   Application logs contain specific events related to an application.
+   Any interactive or non-interactive activity happening inside the application is logged here.
+
+   Examples:
+   - User interaction events
+   - Application change events
+   - Application update events
+   - Application error events
+
+
+4. Audit Logs
+   Usage:
+   Audit logs provide detailed information on system changes and user events.
+   These logs are helpful for compliance requirements and security monitoring.
+
+   Examples:
+   - Data access events
+   - System change events
+   - User activity events
+   - Policy enforcement events
+
+
+5. Network Logs
+   Usage:
+   Network logs provide information on incoming and outgoing network traffic.
+   They are crucial for troubleshooting network issues and incident investigations.
+
+   Examples:
+   - Incoming network traffic events
+   - Outgoing network traffic events
+   - Network connection logs
+   - Network firewall logs
+
+
+6. Access Logs
+   Usage:
+   Access logs provide detailed information about access to different resources.
+
+   Examples:
+   - Web server access logs
+   - Database access logs
+   - Application access logs
+   - API access logs
+
+------------------------------LOG TYPES – OVERVIEW
+
+1. System Logs
+   Usage:
+   The system logs can be helpful in troubleshooting running issues in the OS.
+   These logs provide information on various operating system activities.
+
+   Examples:
+   - System startup and shutdown events
+   - Driver loading events
+   - System error events
+   - Hardware events
+
+
+2. Security Logs
+   Usage:
+   The security logs help detect and investigate incidents.
+   These logs provide information on security-related activities in the system.
+
+   Examples:
+   - Authentication events
+   - Authorization events
+   - Security policy change events
+   - User account change events
+   - Abnormal activity events
+
+
+3. Application Logs
+   Usage:
+   Application logs contain specific events related to an application.
+   Any interactive or non-interactive activity happening inside the application is logged here.
+
+   Examples:
+   - User interaction events
+   - Application change events
+   - Application update events
+   - Application error events
+
+
+4. Audit Logs
+   Usage:
+   Audit logs provide detailed information on system changes and user events.
+   These logs are helpful for compliance requirements and security monitoring.
+
+   Examples:
+   - Data access events
+   - System change events
+   - User activity events
+   - Policy enforcement events
+
+
+5. Network Logs
+   Usage:
+   Network logs provide information on incoming and outgoing network traffic.
+   They are crucial for troubleshooting network issues and incident investigations.
+
+   Examples:
+   - Incoming network traffic events
+   - Outgoing network traffic events
+   - Network connection logs
+   - Network firewall logs
+
+
+6. Access Logs
+   Usage:
+   Access logs provide detailed information about access to different resources.
+
+   Examples:
+   - Web server access logs
+   - Database access logs
+   - Application access logs
+   - API access logs
+-----------------------------Windows Event Logs Analysis-------------------------
+To interact with a log on windows we use -- Event viewer
+A log has--
+Description: This field has a detailed information of the activity.
+Log Name: The Log Name indicates the log file name.
+Logged: This field indicates the time of the activity.
+Event ID: Event IDs are unique identifiers for a specific activity.
+
+Event ID   Description
+-----------------------------------------------
+4624       A user account successfully logged in
+4625       A user account failed to login
+4634       A user account successfully logged off
+4720       A user account was created
+4724       An attempt was made to reset an account’s password
+4722       A user account was enabled
+4725       A user account was disabled
+4726       A user account was deleted
+-----------------------------Web Server Access Logs Analysis----------------------
+
+logs of website or user how visit the site are stored on the server
+
+
+This log file contains all the requests made to the website along with the information on the timeframe, the IP requested, the request type, and the URL. Following are the fields taken from a sample log from an Apache web server access log file which can be found in the directory: /var/log/apache2/access.log  
+
+IP Address: “172.16.0.1” - The IP address of the user who made the request.
+
+Timestamp: “[06/Jun/2024:13:58:44]” - The time when the request was made to the website.
+
+Request: The request details.
+
+HTTP Method: “GET” - Tells the website what action to be performed on the request.
+URL: “/” - The requested resource.
+Status Code: “200” - The response from the server. Different numbers indicate different response results.
+
+User-Agent: “Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36” - Information about the user’s Operating System, browser, etc. when making the request.
+
+MANUAL ANALYSIS
+1. cat
+imp-- rotating log file- means separating log files on the basis of time
+2. cat access.log > access2.log (how combine two log files)
+
+3. grep- to search for specific pattern in our case an IP
+grep "192.168.1.1" access.log
+
+4. less - to access log file in chucks
+(Use spacebar to move to the next page and b to the previous page.)
+( TO SEARCH IN LESS COMMAND TYPE "/"THEN THE PATTERN)
+(Use n to navigate to the next occurrence of your search and N to navigate to the previous occurrence of your search.)
+
+to use grep---
+(1) single query
+
+grep GET access.log
+
+
+(2) double or more query
+grep GET access.log | grep ip_of _machine 
+
+
+
+
+
+
+
