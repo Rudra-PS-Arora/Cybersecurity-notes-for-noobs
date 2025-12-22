@@ -7,29 +7,6 @@ The goal of this repo is to:
 - Build a habit of structured documentation
 - Help beginners who are starting their cybersecurity journey
 
----
 
-## 🧠 Topics Covered
-
-- Networking Fundamentals
-- Linux & Bash Basics
-- Logs & Monitoring
-- Incident Response Fundamentals
-- SOC Concepts
-- Reverse Shells & Payloads (Basics)
-- TryHackMe Labs Notes
-
-> Topics will be updated regularly as I continue learning.
-
----
-
-## 🛠️ How These Notes Are Made
-
-- Written while studying and practicing labs
-- Focused on **simple explanations**
-- Beginner-friendly, step-by-step style
-- No copy-paste from paid material
-
----
 
 
