@@ -19,16 +19,10 @@ The goal of this repo is to:
 - SOC Concepts
 - Reverse Shells & Payloads (Basics)
 - TryHackMe Labs Notes
+- SEIM (Splunk)
 
 > Topics will be updated regularly as I continue learning.
 
 ---
 
-## 🛠️ How These Notes Are Made
 
-- Written while studying and practicing labs
-- Focused on **simple explanations**
-- Beginner-friendly, step-by-step style
-- No copy-paste from paid material
-
---
