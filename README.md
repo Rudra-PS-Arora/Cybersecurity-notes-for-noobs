@@ -20,6 +20,7 @@ The goal of this repo is to:
 - Reverse Shells & Payloads (Basics)
 - TryHackMe Labs Notes
 - SEIM (Splunk)
+- Firewall basics
 
 > Topics will be updated regularly as I continue learning.
 
