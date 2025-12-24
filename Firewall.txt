@@ -1,0 +1,221 @@
+Firewall
+A security tool, hardware or software that is used to filter network traffic by stopping unauthorized incoming and outgoing traffic.
+
+1. Hardware Firewalls (Network-Based)
+
+A hardware firewall is a physical device placed between your network and the internet.
+
+It protects all devices connected to the network.
+
+A hardware firewall is a real physical box sitting between:
+Internet  ↔  Firewall Device  ↔  Internal Network
+
+Inside that box runs:
+Specialized firewall OS
+Packet inspection engines
+Intrusion detection modules
+Rule-processing software
+
+2. Software Firewall
+A software firewall is installed on an individual device and protects only that device.
+
+Windows Defender Firewall
+Linux iptables / nftables
+UFW (Ubuntu Firewall)
+ZoneAlarm
+
+The firewall will allow or deny that traffic based on its maintained rules. 
+
+ It's also important to note that different types of firewalls work on different OSI model layers.
+
+-----------------------Types of firewall------------------------------------
+Stateless Firewall
+This type of firewall operates on layer 3 and layer 4 of the OSI model and works solely by filtering the data based on predetermined rules without taking note of the state of the previous connections. This means it will match every packet with the rules regardless of whether it is part of a legitimate connection. It maintains no information on the state of the previous connections to make decisions for future packets. Due to this, these firewalls can process the packets quickly. However, they cannot apply complex policies to the data based on its relationship with the previous connections. Suppose the firewall denies a few packets from a single source based on its rules. Ideally, it should drop all the future packets from this source because the previous packets could not comply with the firewall’s rules. However, the firewall keeps forgetting this, and future packets from this source will be treated as new and matched by its rules again.
+
+Stateful Firewall
+Unlike stateless firewalls, this type of firewall goes beyond filtering packets by predetermined rules. It also keeps track of previous connections and stores them in a state table. This adds another layer of security by inspecting the packets based on their history with connections. Stateful firewalls operate at layer 3 and layer 4 of the OSI model. Suppose the firewall accepts a few packets from a source address based on its rules. In that case, it will take note of this connection in its stated table and allow all the future packets for this connection to automatically get allowed without inspecting each of them. Similarly, the stateful firewalls take note of the connections for which they deny a few packets, and based upon this information, they deny all the subsequent packets coming from the same source.
+
+Proxy Firewall
+The problem with previous firewalls was their inability to inspect the contents of a packet. Proxy firewalls, or application-level gateways, act as intermediaries between the private network and the Internet and operate on the OSI model’s layer 7. They inspect the content of all packets as well. The requests made by users in a network are forwarded by this proxy after inspection and masking them with their own IP address to provide anonymity for the internal IP addresses. Content filtering policies can be applied to these firewalls to allow/deny incoming and outgoing traffic based on their content.
+
+Next-Generation Firewall (NGFW)
+This is the most advanced type of firewall that operates from layer 3 to layer 7 of the OSI model, offering deep packet inspection and other functionalities that enhance the security of incoming and outgoing network traffic. It has an intrusion prevention system that blocks malicious activities in real time. It offers heuristic analysis by analyzing the patterns of attacks and blocking them instantly before reaching the network. NGFWs have SSL/TLS decryption capabilities, which inspect the packets after decrypting them and correlate the data with the threat intelligence feeds to make efficient decisions.
+
+The table below lists each firewall’s characteristics, which will help you choose the most suitable firewall for different use cases.
+
++---------------------------+-------------------------------------------------------------+
+| Firewalls                 | Characteristics                                              |
++---------------------------+-------------------------------------------------------------+
+| Stateless Firewalls       | - Basic filtering                                           |
+|                           | - No tracking of previous connections                      |
+|                           | - Efficient for high-speed networks                        |
++---------------------------+-------------------------------------------------------------+
+| Stateful Firewalls        | - Recognize traffic by patterns                            |
+|                           | - Complex rules can be applied                             |
+|                           | - Monitor network connections                              |
++---------------------------+-------------------------------------------------------------+
+| Proxy Firewalls           | - Inspect data inside packets                              |
+|                           | - Provide content filtering                                |
+|                           | - Provide application control                              |
+|                           | - Decrypt and inspect SSL/TLS data packets                 |
++---------------------------+-------------------------------------------------------------+
+| Next-Generation Firewalls | - Provide advanced threat protection                       |
+|                           | - Include an Intrusion Prevention System (IPS)             |
+|                           | - Identify anomalies using heuristic analysis              |
+|                           | - Decrypt and inspect SSL/TLS data packets                 |
++---------------------------+-------------------------------------------------------------+
+
+
+
+----------------------------------Rules in Firewalls------------------------
+The basic components of a firewall’s rule are described below:
+
+Source address: The machine’s IP address that would originate the traffic.
+Destination address: The machine’s IP address that would receive the data.
+Port: The port number for the traffic.
+Protocol: The protocol that would be used during the communication.
+Action: This defines the action that would be taken upon identifying any traffic of this particular nature.
+Direction: This field defines the rule’s applicability to incoming or outgoing traffic.
+
+Types of Actions
+
+The component “Action” from a rule indicates the steps to take after a data packet falls under the category of the defined rule. Three main actions that can be applied to a rule are explained below.
+
+(1) Allow
+
+A rule’s “Allow” action indicates that the particular traffic defined inside the rule would be permitted.
+
+For example, let’s create a rule with an action to allow all the outgoing traffic from our network for port 80 (used for HTTP traffic to the Internet).
+
+Action	Source		Destination	Protocol	Port	Direction
+-------------------------------------------------------------------------
+Allow	192.168.1.0/24		Any	TCP		80	Outbound
+
+
+(2) Deny
+A rule’s “Deny” action means that the traffic defined inside the rule would be blocked and not permitted. These rules are fundamental for the security team to deny specific traffic coming from malicious IP addresses and create more rules to reduce the threat surface of the network.
+
+For example, let’s create a rule with an action to deny all the incoming traffic on port 22 (used for remotely connecting to a machine via SSH) of our critical server.
+
+Action	Source	Destination	Protocol	Port	Direction
+Deny	Any	192.168.1.0/24	TCP	22	Inbound
+
+(3)Forward
+The action “Forward” redirects traffic to a different network segment using the forwarding rules created on the firewalls. This applies to the firewalls that provide routing functionality and act as gateways between different network segments.
+
+For example, let’s create a rule with an action to forward all the incoming traffic on port 80 (used for HTTP traffic) to the web server 192.168.1.8.
+
+Action	Source	Destination	Protocol	Port	Direction
+Forward	Any	192.168.1.8	TCP	80	Inbound
+
+
+Directionality of Rules
+Firewalls have different categories of rules, each categorized based on the traffic directionality on which the rules are created. Let’s examine each of these directionalities.
+
+
+Inbound Rules
+Rules are categorized as inbound rules when they are meant to be applied to incoming traffic only. For example, you might allow incoming HTTP traffic (port 80) on your web server.
+
+Outbound Rules
+These rules are made for outgoing traffic only. For example, blocking all outgoing SMTP traffic (port 25) from all the devices except the mail server.
+
+Forward Rules
+Forwarding rules are created to forward specific traffic inside the network. For example, a forwarding rule can be created to forward the incoming HTTP (port 80) traffic to the web server located in your network.
+
+
+------------------------Windows Defender Firewall---------------------
+Windows Defender is a built-in firewall introduced by Microsoft in the Windows OS. This firewall contains all the basic functionality for creating, allowing, or denying specific programs or creating customized rules.
+
+Network Profiles
+There are two available network profiles. Windows firewall determines your current network based on Network Location Awareness (NLA) and applies that profile firewall settings for you. We can have different firewall settings for each of them.
+
+*****IMPORTANT
+A home network is a group of devices connected to the same router that communicate with each other and access the internet through that router.
+
+| Feature      | Modem                         | Router                            |
+| ------------ | ----------------------------- | --------------------------------- |
+| Purpose      | Connects your home to the ISP | Connects devices inside your home |
+| Network Type | Public network                | Private local network             |
+| IP Handling  | Receives public IP from ISP   | Assigns private IPs to devices    |
+| Security     | No firewall                   | Has firewall + NAT                |
+| Device Count | One device (router)           | Many devices                      |
+| Layer        | Mostly Layer 1–2              | Layer 3–4                         |
+
+-------------------------------------------------------------------------
+PC → Router → Modem → ISP → Internet
+
+# created new rules 
+# check already existing rules
+
+---------------------Linux iptables firewall-------------------------------
+Linux also offers the functionality of a built-in firewall. 
+multiple firewall options available here.:
+
+
+(1) Netfilter: 
+
+Netfilter is the framework inside the Linux OS with core firewall functionalities, including packet filtering, NAT, and connection tracking. This framework serves as the foundation for various firewall utilities available in Linux to control network traffic. Some common firewall utilities that utilize this framework are listed below:
+
+iptables: This is the most widely used utility in many Linux distributions. It uses the Netfilter framework that provides various functionalities to control network traffic.
+nftables: It is a successor to the “iptables” utility, with enhanced packet filtering and NAT capabilities. It is also based on the Netfilter framework.
+firewalld: This utility also operates on the Netfilter framework and has predefined rule sets. It works differently from the others and comes with different pre-built network zone configurations.
+
+
+(2) ufw: 
+
+ufw (Uncomplicated Firewall), as the name says, eliminates the complications of making rules in a complex syntax in “iptables”(or its successor) by giving you an easier interface. It is more beginner-friendly. Basically, whatever rules you need in “iptables”, you can define them with some easy commands via ufw, which would then be configuring your desired rules in “iptables”.
+
+Netfilter → iptables / nftables → UFW
+
+*****IMPORTANT
+1. Netfilter (Kernel Engine)
+Netfilter is inside the Linux kernel.
+It is the real firewall engine that:
+
+Intercepts packets
+Applies rules
+Accepts / drops / modifies traffic
+Without Netfilter, no Linux firewall works.
+Think of Netfilter as the firewall engine.
+
+2. iptables (Old Control Tool)
+
+iptables is a userspace command-line tool that tells Netfilter:
+Which packets to allow
+Which packets to block
+How to NAT traffic
+
+EXMAPLE: iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+3. nftables (Modern Replacement)
+nftables is the modern replacement for iptables.
+It does the same job, but:
+Faster
+Cleaner syntax
+More efficient
+Handles IPv4, IPv6, ARP in one framework
+
+
+4. UFW (Friendly Frontend)
+UFW = Uncomplicated Firewall
+It is just a human-friendly wrapper around iptables/nftables.
+When you run:
+ 
+ufw allow 22
+UFW translates that into iptables/nftables rules, which Netfilter enforces.
+
+Netfilter is the kernel-level firewall engine; iptables and nftables configure it; UFW is a user-friendly interface that manages those configurations.
+
+******
+
+COMMANDS:
+sudo ufw status ( to check ufw  status)
+sudo ufw enable/disable
+sudo ufw default allow\deny  outgoing (Default policy =
+the action the firewall will take when no specific rule matches a packet)
+sudo ufw deny 22/tcp ( deny ssh incoming traffic) 
+sudo ufw status numbered ( to check all the active rules)
+sudo ufw delete 2 ( to delete no 2 rule)
+
+----------------------------------------------------------------------------
+
