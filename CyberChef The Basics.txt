@@ -188,4 +188,46 @@ Step4: Read the output and if its is the intended result nice if not try again f
 
 Binary → readable text
 
+🔹 Step 1 — Convert Letters → Binary
+
+Using ASCII:
+
+T = 01010100  
+H = 01001000  
+M = 01001101
+
+
+Merge them:
+
+010101000100100001001101
+
+
+(24 bits total)
+
+🔹 Step 2 — Split into 6-bit Groups
+010101 | 000100 | 100001 | 001101
+
+
+Convert each to decimal:
+
+010101 → 21  
+000100 → 4  
+100001 → 33  
+001101 → 13
+
+🔹 Step 3 — Convert Decimal → Base64 Characters
+
+Using Base64 index table:
+
+21 → V  
+4  → E  
+33 → h  
+13 → N
+
+🧪 Final Output
+THM → VEhN
+
+
+🔥 You just manually performed Base64 encoding.
 ---------------------------------------Thanks------------------------------------
+
