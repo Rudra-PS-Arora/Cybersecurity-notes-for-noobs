@@ -1,0 +1,191 @@
+CyberChef: The Basics
+CyberChef is a simple, intuitive web-based application designed to help with various “cyber” operation tasks within your web browser. Think of it as a Swiss Army knife for data - like having a toolbox of different tools designed to do a specific task. These tasks range from simple encodings like XOR or Base64 to complex operations like AES encryption or RSA decryption. CyberChef operates on recipes, a series of operations executed in order.
+
+
+There are different ways to access and run CyberChef. Let's check the two most convenient methods!
+
+Online Access
+All you need is a web browser and an internet connection
+https://gchq.github.io/CyberChef/
+
+
+offline or Local Copy
+You can run this offline or locally on your machine by downloading the latest release file from this 
+https://github.com/gchq/CyberChef/releases.
+
+--------------------------------Basic Definition----------------------------------
+
+CyberChef is a web-based data analysis & transformation tool used
+CyberChef lets you take any data and run it through operations like:
+
+🔐 Encoding / Decoding
+Base64
+URL encoding
+Hex, Binary
+XOR
+
+🔑 Crypto
+AES encryption/decryption
+RSA decryption
+Hashing (MD5, SHA1, SHA256)
+🧬 Data Analysis
+
+Extract IPs, URLs, emails
+Parse logs
+Decompress files
+Convert formats
+
+🧾 Malware / Forensics
+Analyze suspicious strings
+Decode payloads
+Deobfuscate scripts
+
+
+A recipe is just:
+
+A chain of operations applied step by step to your data.
+-------------------------------------Navigating the Interface-----------------------------
+(1) OPERATIONS
+
+| **Operation**       | **Description**                                                                        | **Example**                                                                                                                                                                |
+| ------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **From Morse Code** | Translates Morse Code into (upper case) alphanumeric characters.                       | `.... .-. . .- - ...` → **THREATS**                                                                                                                                        |
+| **URL Encode**      | Encodes problematic characters into percent-encoding, a format supported by URIs/URLs. | `https://tryhackme.com/r/room/cyberchefbasics` → `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Froom%2Fcyberchefbasics`                                                              |
+| **To Base64**       | Encodes raw data into an ASCII Base64 string.                                          | `This is fun!` → **VGhpcyBpcyBmdW4h**                                                                                                                                      |
+| **To Hex**          | Converts the input string to hexadecimal bytes separated by a delimiter.               | `This Hex conversion is awesome!` → `54 68 69 73 20 48 65 78 20 63 6f 6e 76 65 72 73 69 6f 6e 20 69 73 20 61 77 65 73 6f 6d 					65 21`                                         
+| **To Decimal**      | Converts the input data to an ordinal integer array.                                   | `This Decimal conversion is awesome!` → `84 104 105 115 32 68 101 99 105 109 97 108 32 99 111 110 118 101 114 115 105 111 				110 32 105 115 32 97 119 101 115 111 109 101 33` |
+| **ROT13**           | A simple Caesar substitution cipher rotating letters by 13.                            | `Digital Forensics and Incident Response` → **Qvtvgny Sberafvpf naq Vapvqrag Erfcbafr**                                                                                    |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+(A) Delimeter = separator
+| Character            | Purpose             | ASCII | Hex  |
+| -------------------- | ------------------- | ----- | ---- |
+| Space                | word separator      | 32    | `20` |
+| Comma `,`            | list separator      | 44    | `2C` |
+| Colon `:`            | key/value separator | 58    | `3A` |
+| Semicolon `;`        | command separator   | 59    | `3B` |
+| Slash `/`            | path delimiter      | 47    | `2F` |
+| Backslash `\`        | escape/path         | 92    | `5C` |
+| Ampersand `&`        | parameter separator | 38    | `26` |
+| Equals `=`           | assignment          | 61    | `3D` |
+| Newline `\n`         | line break          | 10    | `0A` |
+| Carriage return `\r` | line break          | 13    | `0D` |
+
+
+in hex*
+
+(B) URL Encoding converts special or “problematic” characters into a safe format
+
+
+Suppose you want to send this as a parameter:
+Hello world!
+Raw (bad)
+https://site.com/?msg=Hello world!
+
+URL Encoded (good)
+https://site.com/?msg=Hello%20world%21
+| Character | Encoded |
+| --------- | ------- |
+| Space     | `%20`   |
+| `!`       | `%21`   |
+
+(2) RECIPE AREA
+Think of CyberChef like a kitchen 🍳
+and the Recipe Area is where you build the cooking instructions.
+
+Your data = ingredients
+Operations (Base64, Hex, XOR, etc.) = tools
+Recipe Area = the instruction list
+
+
+---> What you actually do there
+In the Recipe Area, you:
+
+Choose operations
+(e.g., From Base64, URL Decode, To Hex)
+
+Arrange them in order
+(top → bottom = first → last)
+
+Set options for each operation
+(like delimiter, key, encoding type, etc.)
+
+Click BAKE! to run the whole chain on your input.
+
+So the Recipe Area is literally your step-by-step transformation pipeline.
+
+(3)Input Area
+The input area provides a user-friendly space where you can easily input text or files by pasting, typing, or dragging them to perform operations.
+
+The Input area of CyberChef tool with multiple options.
+
+Additionally, it has the following features:
+
+Add a new input tab: This is where an additional tab is created for the user to use different values from the previous tab.
+Open a new input tab option under the Input Area.
+Open folder as input: This feature allows users to upload a whole folder as input value.
+Open folder as input option under the Input Area.
+Open file as input: This feature allows the user to upload a file as its input value.
+Open file as input option under the Input Area.
+
+Clear input and output: This feature allows the user to clear any input values inserted and the corresponding output value.
+Reset pane layout: This feature brings the tool's interface to its default window sizes.
+
+(4) Output Area
+The output area is a visual space that showcases the data processing results. It neatly presents the outcomes of any manipulations or transformations you have applied to the input data, allowing for a clear and intuitive display of the processed information.
+
+The Output area of CyberChef tool with multiple options.
+
+Features include:
+
+Save output to file: This feature allows the users to save the result into a .dat file.
+Copy raw output to the clipboard: This feature allows users to copy raw output directly to their clipboard, allowing them to quickly copy the results for use in other applications or documents.
+Replace input with output: This feature allows users to quickly overwrite the input data based on the operations' results.
+Maximise output pane: This feature brings the tool's interface to its default window sizes.
+
+
+-----------------------------Thought processs----------------------------------------
+Step1: Setting a clear objective is essential (ex: I want to know what hidden message it contains if it has one.")
+Step2: Input the data
+Step3: Select proper operations or chain of operations 
+Step4: Read the output and if its is the intended result nice if not try again from step 1 or 3 
+
+------------------------------------More operations----------------------------------
++------------------------+------------------------------------------------------------+
+| Specific              | Description                                                |
++------------------------+------------------------------------------------------------+
+| Extract IP addresses  | Extracts all IPv4 and IPv6 addresses                       |
+| Extract URLs          | Extracts URLs (protocol required: http, ftp, etc.)        |
+| Extract email         | Extracts email addresses (anything@domain.com)            |
++------------------------+------------------------------------------------------------+
+
+
++--------------------+-----------------------------------------------------------+
+| Operation          | Description                                               |
++--------------------+-----------------------------------------------------------+
+| From UNIX Timestamp| Converts UNIX timestamp → readable datetime               |
+| To UNIX Timestamp  | Converts datetime → UNIX timestamp                        |
++--------------------+-----------------------------------------------------------+
+
+
++-------------+------------------------------------------------------------+---------------------------------------------+
+| Operation   | Description                                                | Example                                     |
++-------------+------------------------------------------------------------+---------------------------------------------+
+| From Base64 | Decodes Base64 → raw data                                  | V2VsY29tZSB0byB0cnloYWNrbWUh → Welcome...   |
+| URL Decode  | Converts % encoded characters → normal text               | https%3A%2F%2F → https://                  |
+| From Base85 | Decodes Base85 encoding                                    | BOu!rD]j7BEbo7 → hello world                |
+| From Base58 | Decodes Base58 encoding (no confusing chars)              | AXLU7qR → Thm58                             |
+| To Base62   | Encodes data using base62                                  | Thm62 → 6NiRkOY                             |
++-------------+------------------------------------------------------------+---------------------------------------------+
+
+
+| Encoding   | Why it exists            | Key idea                          |
+| ---------- | ------------------------ | --------------------------------- |
+| **Base64** | Most common              | Uses 64 characters; safe for web  |
+| **Base85** | More compact than Base64 | Shorter output                    |
+| **Base58** | Human friendly           | Removes confusing chars (0,O,l,I) |
+| **Base62** | URL + system friendly    | Only numbers + letters            |
+
+Binary → readable text
+
+---------------------------------------Thanks------------------------------------
